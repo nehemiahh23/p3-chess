@@ -12,6 +12,7 @@ if __name__ == '__main__':
 
     def swapPositions(inp1, inp2):
         board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]]
+        board[inp2[0]][inp2[1]].pos = inp2
         print(board[0])
         print(board[1])
 
@@ -20,3 +21,5 @@ if __name__ == '__main__':
             for sq in row:
                 if sq == pa2:
                     return [board.index(row), row.index(sq)]
+
+# prevent movement OOB (check if indices > 0)
