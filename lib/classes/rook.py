@@ -2,6 +2,7 @@ class Rook:
 
     def __init__(self, pos):
         self.pos = pos
+        
         self.n1_pos = [pos[0] - 1, pos[1]]
         self.n2_pos = [pos[0] - 2, pos[1]]
         self.n3_pos = [pos[0] - 3, pos[1]]
@@ -37,6 +38,6 @@ class Rook:
         self.w6_pos = [pos[0], pos[1] - 6]
         self.w7_pos = [pos[0], pos[1] - 7]
         self.w8_pos = [pos[0], pos[1] - 8]
-
+        
     def __repr__(self):
         return "♜"

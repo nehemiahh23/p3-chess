@@ -2,6 +2,7 @@ class Bishop:
 
     def __init__(self, pos):
         self.pos = pos
+        
         self.ne1_pos = [pos[0] - 1, pos[1] + 1]
         self.ne2_pos = [pos[0] - 2, pos[1] + 2]
         self.ne3_pos = [pos[0] - 3, pos[1] + 3]
@@ -37,7 +38,6 @@ class Bishop:
         self.nw6_pos = [pos[0] - 6, pos[1] - 6]
         self.nw7_pos = [pos[0] - 7, pos[1] - 7]
         self.nw8_pos = [pos[0] - 8, pos[1] - 8]
-
 
     def __repr__(self):
         return "♝"

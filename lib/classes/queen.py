@@ -2,6 +2,7 @@ class Queen:
 
     def __init__(self, pos):
         self.pos = pos
+
         self.n1_pos = [pos[0] - 1, pos[1]]
         self.n2_pos = [pos[0] - 2, pos[1]]
         self.n3_pos = [pos[0] - 3, pos[1]]
