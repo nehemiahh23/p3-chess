@@ -43,7 +43,7 @@ if __name__ == '__main__':
     ng1 = Knight([7, 6])
     rh1 = Rook([7, 7])
 
-    board = [[ra8, nb8, bc8, qd8, ke8, bf8, ng8, rh8], [pa7, pb7, pc7, pd7, pe7, pf7, pg7, ph7], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [pa2, pb2, pc2, pd2, pe2, pf2, pg2, ph2], [ra1, nb1, bc1, qd1, ke1, bf1, ng1, rh1]]
+    board = [[ra8, nb8, bc8, qd8, ke8, bf8, ng8, rh8], [pa7, pb7, pc7, pd7, pe7, pf7, pg7, ph7], ["□", "□", "□", "□", "□", "□", "□", "□"], ["□", "□", "□", "□", "□", "□", "□", "□"], ["□", "□", "□", "□", "□", "□", "□", "□"], ["□", "□", "□", "□", "□", "□", "□", "□"], [pa2, pb2, pc2, pd2, pe2, pf2, pg2, ph2], [ra1, nb1, bc1, qd1, ke1, bf1, ng1, rh1]]
 
     def print_board():
         for row in board:
@@ -52,14 +52,19 @@ if __name__ == '__main__':
     def swap_positions(inp1, inp2):
         pos_exists = False
         pos_vacant = False
+        
         if 0 <= inp2[0] <= 7 and 0 <= inp2[1] <= 7: # checks if desired position is on the board
             pos_exists = True
         else:
             print("position invalid")
-        if board[inp2[0]][inp2[1]] == None: # checks if desired position is vacant (will be tweaked to check for team later)
+        if board[inp2[0]][inp2[1]] != None: # checks if desired position is vacant (will be tweaked to check for team later)
+            if board[inp1[0]][inp1[1]].black == board[inp2[0]][inp2[1]].black:
+                print("position occupied")
+            else:
+                board[inp2[0]][inp2[1]].cptd = True
                 pos_vacant = True
         else:
-            print("position occupied")
+            pos_vacant = True
         if pos_exists and pos_vacant:
             board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]]
             board[inp2[0]][inp2[1]].pos = inp2

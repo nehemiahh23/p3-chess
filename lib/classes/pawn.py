@@ -23,7 +23,7 @@ class Pawn:
 
     def __repr__(self):
         if self.cptd:
-            return None
+            return "□"
         else:
             if self.black:
                 return "♙"
