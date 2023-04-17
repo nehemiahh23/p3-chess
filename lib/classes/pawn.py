@@ -4,6 +4,7 @@ class Pawn:
         self.pos = pos
         self._start = pos
         self.black = black
+        self.cptd = False
         self.calc()
 
     def calc(self):
@@ -21,7 +22,10 @@ class Pawn:
             self.se_pos = [self.pos[0] + 1, self.pos[1] + 1]
 
     def __repr__(self):
-        if self.black:
-            return "♙"
+        if self.cptd:
+            return None
         else:
-            return "♟"
+            if self.black:
+                return "♙"
+            else:
+                return "♟"

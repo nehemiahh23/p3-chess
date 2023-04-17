@@ -4,10 +4,7 @@ class Knight:
     def __init__(self, pos, black=False):
         self.pos = pos
         self.black = black
-        self.ne_pos = []
-        self.se_pos = []
-        self.sw_pos = []
-        self.nw_pos = []
+        self.cptd = False
         self.calc()
 
     def calc(self):
@@ -21,7 +18,10 @@ class Knight:
         self.nww_pos = [self.pos[0] - 1, self.pos[1] - 2]
 
     def __repr__(self):
-        if self.black:
-            return "♘"
+        if self.cptd:
+            return None
         else:
-            return "♞"
+            if self.black:
+                return "♘"
+            else:
+                return "♞"

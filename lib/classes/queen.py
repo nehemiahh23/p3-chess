@@ -3,6 +3,7 @@ class Queen:
     def __init__(self, pos, black=False):
         self.pos = pos
         self.black = black
+        self.cptd = False
         self.calc()
 
     def calc(self):
@@ -71,7 +72,10 @@ class Queen:
         self.nw7_pos = [self.pos[0] - 7, self.pos[1] - 7]
 
     def __repr__(self):
-        if self.black:
-            return "♕"
+        if self.cptd:
+            return None
         else:
-            return "♛"
+            if self.black:
+                return "♕"
+            else:
+                return "♛"
