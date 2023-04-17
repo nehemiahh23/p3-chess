@@ -56,8 +56,7 @@ if __name__ == '__main__':
                 print("position vacant, moving")
                 board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]]
                 board[inp2[0]][inp2[1]].pos = inp2
-                print(board[0])
-                print(board[1])
+                print_board()
             else:
                 print("position occupied")
         else:
