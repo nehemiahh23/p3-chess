@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 from lib.classes.pawn import Pawn
+from lib.classes.rook import Rook
+from lib.classes.knight import Knight
+from lib.classes.bishop import Bishop
+from lib.classes.queen import Queen
+from lib.classes.king import King
 
 if __name__ == '__main__':
     ra8 = Rook([0, 0])
@@ -18,7 +23,7 @@ if __name__ == '__main__':
     pe7 = Pawn([1, 4])
     pf7 = Pawn([1, 5])
     pg7 = Pawn([1, 6])
-    pH7 = Pawn([1, 7])
+    ph7 = Pawn([1, 7])
 
     pa2 = Pawn([6, 0])
     pb2 = Pawn([6, 1])
