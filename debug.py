@@ -50,17 +50,21 @@ if __name__ == '__main__':
             print(row)
 
     def swap_positions(inp1, inp2):
+        pos_exists = False
+        pos_vacant = False
         if 0 <= inp2[0] <= 7 and 0 <= inp2[1] <= 7: # checks if desired position is on the board
-            print("position valid, checking vacancy")
-            if board[inp2[0]][inp2[1]] == None: # checks if desired position is vacant (will be tweaked to check for team later)
-                print("position vacant, moving")
-                board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]]
-                board[inp2[0]][inp2[1]].pos = inp2
-                print_board()
-            else:
-                print("position occupied")
+            pos_exists = True
         else:
             print("position invalid")
+        if board[inp2[0]][inp2[1]] == None: # checks if desired position is vacant (will be tweaked to check for team later)
+                pos_vacant = True
+        else:
+            print("position occupied")
+        if pos_exists and pos_vacant:
+            board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]]
+            board[inp2[0]][inp2[1]].pos = inp2
+            board[inp2[0]][inp2[1]].calc()
+            print_board()
 
     def get_index():
         for row in board:
