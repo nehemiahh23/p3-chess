@@ -13,7 +13,6 @@ class Queen:
         self.n5_pos = [self.pos[0] - 5, self.pos[1]]
         self.n6_pos = [self.pos[0] - 6, self.pos[1]]
         self.n7_pos = [self.pos[0] - 7, self.pos[1]]
-        self.n8_pos = [self.pos[0] - 8, self.pos[1]]
 
         self.ne1_pos = [self.pos[0] - 1, self.pos[1] + 1]
         self.ne2_pos = [self.pos[0] - 2, self.pos[1] + 2]
@@ -22,7 +21,6 @@ class Queen:
         self.ne5_pos = [self.pos[0] - 5, self.pos[1] + 5]
         self.ne6_pos = [self.pos[0] - 6, self.pos[1] + 6]
         self.ne7_pos = [self.pos[0] - 7, self.pos[1] + 7]
-        self.ne8_pos = [self.pos[0] - 8, self.pos[1] + 8]
 
         self.e1_pos = [self.pos[0], self.pos[1] + 1]
         self.e2_pos = [self.pos[0], self.pos[1] + 2]
@@ -31,7 +29,6 @@ class Queen:
         self.e5_pos = [self.pos[0], self.pos[1] + 5]
         self.e6_pos = [self.pos[0], self.pos[1] + 6]
         self.e7_pos = [self.pos[0], self.pos[1] + 7]
-        self.e8_pos = [self.pos[0], self.pos[1] + 8]
 
         self.se1_pos = [self.pos[0] + 1, self.pos[1] + 1]
         self.se2_pos = [self.pos[0] + 2, self.pos[1] + 2]
@@ -40,7 +37,6 @@ class Queen:
         self.se5_pos = [self.pos[0] + 5, self.pos[1] + 5]
         self.se6_pos = [self.pos[0] + 6, self.pos[1] + 6]
         self.se7_pos = [self.pos[0] + 7, self.pos[1] + 7]
-        self.se8_pos = [self.pos[0] + 8, self.pos[1] + 8]
 
         self.s1_pos = [self.pos[0] + 1, self.pos[1]]
         self.s2_pos = [self.pos[0] + 2, self.pos[1]]
@@ -49,7 +45,6 @@ class Queen:
         self.s5_pos = [self.pos[0] + 5, self.pos[1]]
         self.s6_pos = [self.pos[0] + 6, self.pos[1]]
         self.s7_pos = [self.pos[0] + 7, self.pos[1]]
-        self.s8_pos = [self.pos[0] + 8, self.pos[1]]
 
         self.sw1_pos = [self.pos[0] + 1, self.pos[1] - 1]
         self.sw2_pos = [self.pos[0] + 2, self.pos[1] - 2]
@@ -58,7 +53,6 @@ class Queen:
         self.sw5_pos = [self.pos[0] + 5, self.pos[1] - 5]
         self.sw6_pos = [self.pos[0] + 6, self.pos[1] - 6]
         self.sw7_pos = [self.pos[0] + 7, self.pos[1] - 7]
-        self.sw8_pos = [self.pos[0] + 8, self.pos[1] - 8]
 
         self.w1_pos = [self.pos[0], self.pos[1] - 1]
         self.w2_pos = [self.pos[0], self.pos[1] - 2]
@@ -67,7 +61,6 @@ class Queen:
         self.w5_pos = [self.pos[0], self.pos[1] - 5]
         self.w6_pos = [self.pos[0], self.pos[1] - 6]
         self.w7_pos = [self.pos[0], self.pos[1] - 7]
-        self.w8_pos = [self.pos[0], self.pos[1] - 8]
 
         self.nw1_pos = [self.pos[0] - 1, self.pos[1] - 1]
         self.nw2_pos = [self.pos[0] - 2, self.pos[1] - 2]
@@ -76,7 +69,6 @@ class Queen:
         self.nw5_pos = [self.pos[0] - 5, self.pos[1] - 5]
         self.nw6_pos = [self.pos[0] - 6, self.pos[1] - 6]
         self.nw7_pos = [self.pos[0] - 7, self.pos[1] - 7]
-        self.nw8_pos = [self.pos[0] - 8, self.pos[1] - 8]
 
     def __repr__(self):
         if self.black:
