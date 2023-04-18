@@ -57,19 +57,22 @@ if __name__ == '__main__':
             pos_exists = True
         else:
             print("position invalid")
-        if board[inp2[0]][inp2[1]] != None: # checks if desired position is vacant (will be tweaked to check for team later)
-            if board[inp1[0]][inp1[1]].black == board[inp2[0]][inp2[1]].black:
-                print("position occupied")
-            else:
-                board[inp2[0]][inp2[1]].cptd = True
-                pos_vacant = True
+        if board[inp2[0]][inp2[1]] != "□": # checks if desired position is vacant
+                if board[inp1[0]][inp1[1]].black == board[inp2[0]][inp2[1]].black: # team check for capt
+                    print("position occupied")
+                else:
+                    board[inp2[0]][inp2[1]].cptd = True
+                    pos_vacant = True
         else:
             pos_vacant = True
         if pos_exists and pos_vacant:
-            board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]]
-            board[inp2[0]][inp2[1]].pos = inp2
-            board[inp2[0]][inp2[1]].calc()
-            print_board()
+            if isinstance(board[inp1[0]][inp1[1]], Pawn) and inp2 == board[inp1[0]][inp1[1]].n2_pos:
+                print("position blocked")
+            else:
+                board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]] # movement
+                board[inp2[0]][inp2[1]].pos = inp2
+                board[inp2[0]][inp2[1]].calc()
+                print_board()
 
     def get_index():
         for row in board:
