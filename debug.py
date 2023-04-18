@@ -50,8 +50,16 @@ if __name__ == '__main__':
             print(row)
 
     def swap_positions(inp1, inp2):
+        def move():
+            board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]] # movement
+            board[inp2[0]][inp2[1]].pos = inp2
+            board[inp2[0]][inp2[1]].calc()
+            print_board()
         pos_exists = False
         pos_vacant = False
+        # print(range(inp1[1] + 1, inp2[1]), -1)
+        for num in range(inp1[1] + 1, inp2[1]):
+            print(num)
         
         if 0 <= inp2[0] <= 7 and 0 <= inp2[1] <= 7: # checks if desired position is on the board
             pos_exists = True
@@ -66,22 +74,56 @@ if __name__ == '__main__':
         else:
             pos_vacant = True
         if pos_exists and pos_vacant:
-            if isinstance(board[inp1[0]][inp1[1]], Pawn) and inp2 == board[inp1[0]][inp1[1]].n2_pos: # pawn collision (1st move)
-                print("position blocked")
-            elif isinstance(board[inp1[0]][inp1[1]], Rook): # rook collision
-                for col in range(inp1[1] + 1, inp2[1]): # horizontal
-                    if board[inp1[0]][col] != "□":
+            if isinstance(board[inp1[0]][inp1[1]], Pawn): # pawn collision (1st move)
+                if inp2 == board[inp1[0]][inp1[1]].n2_pos:
+                    if board[inp1[0] - 1][inp1[1]] != "□":
                         print("position blocked")
-                        # return None
-            # elif isinstance(board[inp1[0]][inp1[1]], Bishop): # bishop collision
-            #     pass
-            # elif isinstance(board[inp1[0]][inp1[1]], Queen): # queen collision
-            #     pass
-            else:
-                board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]] # movement
-                board[inp2[0]][inp2[1]].pos = inp2
-                board[inp2[0]][inp2[1]].calc()
-                print_board()
+                    else:
+                        move()
+                else:
+                    move()
+            elif isinstance(board[inp1[0]][inp1[1]], Rook): # rook collision
+                r_row_range = range(inp1[1] + 1, inp2[1]) if inp1[1] < inp2[1] else range(inp1[1], inp2[1], -1)
+                r_col_range = range(inp1[0] - 1, inp2[0]) if inp1[0] < inp2[0] else range(inp1[0] - 1, inp2[0], -1)
+                print(r_col_range)
+                if inp2[1] == inp1[1] + 1 or inp2[1] == inp1[1] - 1: # horizontal
+                    move()
+                else:
+                    blocked = True
+                    for col in r_row_range: 
+                        print(col)
+                        if board[inp1[0]][col] != "□":
+                            print("position blocked")
+                            board[inp2[0]][inp2[1]].cptd = False
+                        else:
+                            blocked = False
+                    if not blocked:
+                        move()
+                            # return None
+                
+                if inp2[0] == inp1[0] + 1 or inp2[0] == inp1[0] - 1: # vertical
+                    move()
+                else:
+                    blocked = True
+                    for row in r_col_range:
+                        print(board[row][inp1[1]])
+                        if board[row][inp1[1]] != "□":
+                            print("position blocked")
+                            board[inp2[0]][inp2[1]].cptd = False
+                            return None
+                        else:
+                            blocked = False
+                    if not blocked:
+                        move()
+
+            elif isinstance(board[inp1[0]][inp1[1]], Knight): # bishop collision
+                move()
+            elif isinstance(board[inp1[0]][inp1[1]], King): # bishop collision
+                move()
+            elif isinstance(board[inp1[0]][inp1[1]], Bishop): # bishop collision
+                move()
+            elif isinstance(board[inp1[0]][inp1[1]], Queen): # queen collision
+                move()
 
     def get_index():
         for row in board:
