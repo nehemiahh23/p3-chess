@@ -66,8 +66,17 @@ if __name__ == '__main__':
         else:
             pos_vacant = True
         if pos_exists and pos_vacant:
-            if isinstance(board[inp1[0]][inp1[1]], Pawn) and inp2 == board[inp1[0]][inp1[1]].n2_pos:
+            if isinstance(board[inp1[0]][inp1[1]], Pawn) and inp2 == board[inp1[0]][inp1[1]].n2_pos: # pawn collision (1st move)
                 print("position blocked")
+            elif isinstance(board[inp1[0]][inp1[1]], Rook): # rook collision
+                for col in range(inp1[1] + 1, inp2[1]): # horizontal
+                    if board[inp1[0]][col] != "□":
+                        print("position blocked")
+                        # return None
+            # elif isinstance(board[inp1[0]][inp1[1]], Bishop): # bishop collision
+            #     pass
+            # elif isinstance(board[inp1[0]][inp1[1]], Queen): # queen collision
+            #     pass
             else:
                 board[inp1[0]][inp1[1]], board[inp2[0]][inp2[1]] = board[inp2[0]][inp2[1]], board[inp1[0]][inp1[1]] # movement
                 board[inp2[0]][inp2[1]].pos = inp2
