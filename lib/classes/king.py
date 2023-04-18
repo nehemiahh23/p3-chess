@@ -4,6 +4,7 @@ class King:
     def __init__(self, pos, black=False):
         self.pos = pos
         self.black = black
+        self.cptd = False
         self.calc()
 
     def calc(self):
@@ -17,7 +18,10 @@ class King:
         self.nw_pos = [self.pos[0] - 1, self.pos[1] - 1]
 
     def __repr__(self):
-        if self.black:
-            return "♔"
+        if self.cptd:
+            return "□"
         else:
-            return "♚"
+            if self.black:
+                return "♔"
+            else:
+                return "♚"
