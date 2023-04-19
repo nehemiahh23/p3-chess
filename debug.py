@@ -80,7 +80,7 @@ if __name__ == '__main__':
                         print("position blocked")
                     else:
                         move()
-                elif inp2 == board[inp1[0]][inp1[1]].s2_pos:
+                elif hasattr(board[inp1[0]][inp1[1]], "s2_pos") and inp2 == board[inp1[0]][inp1[1]].s2_pos:
                     if board[inp1[0] + 1][inp1[1]] != "□":
                         print("position blocked")
                     else:
@@ -89,8 +89,6 @@ if __name__ == '__main__':
                     move()
             
             elif isinstance(board[inp1[0]][inp1[1]], Rook): # rook collision
-                r_row_range = range(inp1[1] + 1, inp2[1]) if inp1[1] < inp2[1] else range(inp1[1], inp2[1], -1) # range of indices block checker will iterate through
-                r_col_range = range(inp1[0] - 1, inp2[0]) if inp1[0] < inp2[0] else range(inp1[0] - 1, inp2[0], -1) # ^
                 if inp2[1] == inp1[1] + 1 or inp2[1] == inp1[1] - 1: # horizontal; if its moving 1 square
                     move()
                 else: # if its moving more than 1 square
@@ -112,7 +110,8 @@ if __name__ == '__main__':
                     for row in r_col_range: # iterates through the row
                         if board[row][inp1[1]] != "□": # if the space isnt empty
                             print("position blocked") # print error message
-                            board[inp2[0]][inp2[1]].cptd = False # uncapture piece at desired position
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                board[inp2[0]][inp2[1]].cptd = False # uncapture piece at desired position
                             return None # for some reason the loop wasnt closing with this one, this line does that
                         else: # if space is empty
                             blocked = False # set blocked to false
