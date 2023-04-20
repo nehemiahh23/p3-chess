@@ -6,6 +6,7 @@ class Pawn:
         self.black = black
         self.cptd = False
         self.calc()
+        self.positions = [0, 1, 2, 3]
 
     def calc(self):
         if self.black == False:
