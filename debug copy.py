@@ -92,6 +92,9 @@ if __name__ == '__main__':
                 if inp1[1] < inp2[1]: # if move right (if start col < end col)
                     print("moving right")
                     if inp1[1] + 1 == inp2[1]: # if its moving 1 square
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
                         move()
                     else: # if its moving more than 1 square
                         piece_inst = board[inp1[0]][inp1[1]]
@@ -110,9 +113,12 @@ if __name__ == '__main__':
                                 print(board[inp2[0]][inp2[1]])
                                 board[inp2[0]][inp2[1]].cptd = True
                             move()
-                if inp1[1] > inp2[1]: # if move left (if start col > end col)
+                elif inp1[1] > inp2[1]: # if move left (if start col > end col)
                     print("moving left")
                     if inp1[1] - 1 == inp2[1]: # if its moving 1 square
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
                         move()
                     else: # if its moving more than 1 square
                         piece_inst = board[inp1[0]][inp1[1]]
@@ -131,10 +137,13 @@ if __name__ == '__main__':
                                 print(board[inp2[0]][inp2[1]])
                                 board[inp2[0]][inp2[1]].cptd = True
                             move()
-                if inp1[0] > inp2[0]: # if move up (if start row > end row)
+                elif inp1[0] > inp2[0]: # if move up (if start row > end row)
                     print("moving up")
                     if inp1[0] - 1 == inp2[0]: # if its moving 1 square
                         blocked = False
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
                         move()
                     else: # if its moving more than 1 square
                         piece_inst = board[inp1[0]][inp1[1]]
@@ -153,9 +162,12 @@ if __name__ == '__main__':
                             if hasattr(board[inp2[0]][inp2[1]], "cptd"):
                                 board[inp2[0]][inp2[1]].cptd = True
                             move()
-                if inp1[0] < inp2[0]: # if move down (if start row < end row)
+                elif inp1[0] < inp2[0]: # if move down (if start row < end row)
                     print("moving down")
                     if inp1[0] + 1 == inp2[0]: # if its moving 1 square
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
                         move()
                     else: # if its moving more than 1 square
                         piece_inst = board[inp1[0]][inp1[1]]
@@ -176,6 +188,7 @@ if __name__ == '__main__':
                                 print(board[inp2[0]][inp2[1]])
                                 board[inp2[0]][inp2[1]].cptd = True
                             move()
+                #region old stuff
                 # if inp2[1] == inp1[1] + 1 or inp2[1] == inp1[1] - 1: # horizontal; if its moving 1 square
                 #     move()
                 # else: # if its moving more than 1 square
@@ -209,96 +222,301 @@ if __name__ == '__main__':
                 #             blocked = False # set blocked to false
                 #     if not blocked: # after checks, if blocked is false, move
                 #         move()
+                # endregion
 
             elif isinstance(board[inp1[0]][inp1[1]], Bishop): # bishop collision
-                if inp2[0] == inp1[0] - 1 and inp2[1] == inp1[1] + 1: # ne; if moving 1 square
-                    move()
-                else: # if its moving more than 1 square
-                    blocked = True # blocked is true by default
-                    for arr in board[inp1[0]][inp1[1]].positions: # for every list of positions the piece at the starter pos has
-                        for pos in arr: # for every pos in the list of pos's
-                            if pos == inp2: # if inp2 is in that list
-                                for pos in arr[slice(arr.index(pos))]: # for every position between start and end
-                                    if board[pos[0]][pos[1]] != "□": # if the space isnt empty
-                                        print("position blocked") # print error message
-                                        if hasattr(board[inp2[0]][inp2[1]], "ctpd"): # if the thing at the pos can be cptd
-                                            board[inp2[0]][inp2[1]].cptd = False # uncapture piece at desired position
-                                        return None # for some reason the loop wasnt closing with this one, this line does that
-                                    else: # if space is empty
-                                        blocked = False # set blocked to false
-                    if not blocked: # after checks, if blocked is false, move
+                if inp1[0] > inp2[0] and inp1[1] < inp2[1]: # if move ne (row > row, col < col)
+                    if inp1[0] - 1 == inp2[0] and inp1[1] + 1 == inp2[1]:
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
                         move()
-                
-                if inp2[0] == inp1[0] + 1 and inp2[1] == inp1[1] + 1: # se; if moving 1 square
-                    move()
-                else: # if its moving more than 1 square
-                    blocked = True # blocked is true by default
-                    piece = board[inp1[0]][inp1[1]]
-                    if hasattr(piece, "positions"):
-                        for arr in board[inp1[0]][inp1[1]].positions: # for every list of positions the piece at the starter pos has
-                            for pos in arr: # for every pos in the list of pos's
-                                if pos == inp2: # if inp2 is in that list
-                                    for pos in arr[slice(arr.index(pos))]: # for every position between start and end
-                                        if board[pos[0]][pos[1]] != "□": # if the space isnt empty
-                                            print("position blocked") # print error message
-                                            if hasattr(board[inp2[0]][inp2[1]], "ctpd"): # if the thing at the pos can be cptd
-                                                board[inp2[0]][inp2[1]].cptd = False # uncapture piece at desired position
-                                            return None # for some reason the loop wasnt closing with this one, this line does that
-                                        else: # if space is empty
-                                            blocked = False # set blocked to false
-                                            return None # after successfully moving, the first for loop tries to check the original position for .positions
-                            
-                        if not blocked: # after checks, if blocked is false, move
+                    else:
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[0]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[0] < inp2[0] and inp1[1] < inp2[1]: # if move se (row < row, col < col)
+                    if inp1[0] + 1 == inp2[0] and inp1[1] + 1 == inp2[1]:
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else:
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[1]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[0] < inp2[0] and inp1[1] > inp2[1]: # if move sw (row > row, col < col)
+                    if inp1[0] + 1 == inp2[0] and inp1[1] - 1 == inp2[1]:
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else:
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[2]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[0] > inp2[0] and inp1[1] > inp2[1]: # if move nw (row > row, col < col)
+                    if inp1[0] - 1 == inp2[0] and inp1[1] - 1 == inp2[1]:
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else:
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[3]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
                             move()
 
-                if inp2[0] == inp1[0] + 1 and inp2[1] == inp1[1] - 1: # sw; if moving 1 square
-                    move()
-                else: # if its moving more than 1 square
-                    blocked = True # blocked is true by default
-                    piece = board[inp1[0]][inp1[1]]
-                    if hasattr(piece, "positions"):
-                        for arr in board[inp1[0]][inp1[1]].positions: # for every list of positions the piece at the starter pos has
-                            for pos in arr: # for every pos in the list of pos's
-                                if pos == inp2: # if inp2 is in that list
-                                    for pos in arr[slice(arr.index(pos))]: # for every position between start and end
-                                        if board[pos[0]][pos[1]] != "□": # if the space isnt empty
-                                            print("position blocked") # print error message
-                                            if hasattr(board[inp2[0]][inp2[1]], "ctpd"): # if the thing at the pos can be cptd
-                                                board[inp2[0]][inp2[1]].cptd = False # uncapture piece at desired position
-                                            return None # for some reason the loop wasnt closing with this one, this line does that
-                                        else: # if space is empty
-                                            blocked = False # set blocked to false
-                                            return None # after successfully moving, the first for loop tries to check the original position for .positions
-                            
-                        if not blocked: # after checks, if blocked is false, move
-                            move()
-
-                if inp2[0] == inp1[0] - 1 and inp2[1] == inp1[1] - 1: # nw; if moving 1 square
-                    move()
-                else: # if its moving more than 1 square
-                    blocked = True # blocked is true by default
-                    piece = board[inp1[0]][inp1[1]]
-                    if hasattr(piece, "positions"):
-                        for arr in board[inp1[0]][inp1[1]].positions: # for every list of positions the piece at the starter pos has
-                            for pos in arr: # for every pos in the list of pos's
-                                if pos == inp2: # if inp2 is in that list
-                                    for pos in arr[slice(arr.index(pos))]: # for every position between start and end
-                                        if board[pos[0]][pos[1]] != "□": # if the space isnt empty
-                                            print("position blocked") # print error message
-                                            if hasattr(board[inp2[0]][inp2[1]], "ctpd"): # if the thing at the pos can be cptd
-                                                board[inp2[0]][inp2[1]].cptd = False # uncapture piece at desired position
-                                            return None # for some reason the loop wasnt closing with this one, this line does that
-                                        else: # if space is empty
-                                            blocked = False # set blocked to false
-                                            return None # after successfully moving, the first for loop tries to check the original position for .positions
-                            
-                        if not blocked: # after checks, if blocked is false, move
-                            move()
 
             elif isinstance(board[inp1[0]][inp1[1]], Queen): # queen collision
-                move()
+                if inp1[1] < inp2[1] and inp1[0] == inp2[0]: # if move right (if start col < end col)
+                    print("moving right")
+                    if inp1[1] + 1 == inp2[1]: # if its moving 1 square
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else: # if its moving more than 1 square
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[2]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[1] > inp2[1] and inp1[0] == inp2[0]: # if move left (if start col > end col)
+                    print("moving left")
+                    if inp1[1] - 1 == inp2[1]: # if its moving 1 square
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else: # if its moving more than 1 square
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[6]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[0] > inp2[0] and inp1[1] == inp2[1]: # if move up (if start row > end row)
+                    print("moving up")
+                    if inp1[0] - 1 == inp2[0]: # if its moving 1 square
+                        blocked = False
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else: # if its moving more than 1 square
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[0]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                print(board[inp2[0]][inp2[1]])
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[0] < inp2[0] and inp1[1] == inp2[1]: # if move down (if start row < end row)
+                    print("moving down")
+                    if inp1[0] + 1 == inp2[0]: # if its moving 1 square
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else: # if its moving more than 1 square
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[4]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                # if hasattr(board[inp2[0]][inp2[1]], "ctpd"):
+                                #     board[inp2[0]][inp2[1]].cptd = False
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[0] > inp2[0] and inp1[1] < inp2[1]: # if move ne (row > row, col < col)
+                    if inp1[0] - 1 == inp2[0] and inp1[1] + 1 == inp2[1]:
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else:
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[1]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[0] < inp2[0] and inp1[1] < inp2[1]: # if move se (row < row, col < col)
+                    if inp1[0] + 1 == inp2[0] and inp1[1] + 1 == inp2[1]:
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else:
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[3]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[0] < inp2[0] and inp1[1] > inp2[1]: # if move sw (row > row, col < col)
+                    if inp1[0] + 1 == inp2[0] and inp1[1] - 1 == inp2[1]:
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else:
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[5]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+                elif inp1[0] > inp2[0] and inp1[1] > inp2[1]: # if move nw (row > row, col < col)
+                    if inp1[0] - 1 == inp2[0] and inp1[1] - 1 == inp2[1]:
+                        if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                        move()
+                    else:
+                        piece_inst = board[inp1[0]][inp1[1]]
+                        arr = piece_inst.positions[7]
+                        desired_pos = [pos for pos in arr if pos == [inp2[0], inp2[1]]][0]
+                        for pos in arr[slice(arr.index(desired_pos))]:
+                            if board[pos[0]][pos[1]] != "□":
+                                print("position blocked")
+                                return
+                            else:
+                                print("not blocked")
+                                blocked = False
+
+                        if not blocked:
+                            if hasattr(board[inp2[0]][inp2[1]], "cptd"):
+                                print(board[inp2[0]][inp2[1]])
+                                board[inp2[0]][inp2[1]].cptd = True
+                            move()
+
+
+
             elif isinstance(board[inp1[0]][inp1[1]], Knight): # bishop collision
                 move()
+
             elif isinstance(board[inp1[0]][inp1[1]], King): # bishop collision
                 move()
 
