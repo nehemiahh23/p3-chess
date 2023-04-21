@@ -29,3 +29,4 @@ class Pawn:
                 return "♙"
             else:
                 return "♟"
+                
