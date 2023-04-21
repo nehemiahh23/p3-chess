@@ -7,6 +7,7 @@ from lib.classes.queen import Queen
 from lib.classes.king import King
 
 if __name__ == '__main__':
+
     ra8 = Rook([0, 0], black=True)
     nb8 = Knight([0, 1], black=True)
     bc8 = Bishop([0, 2], black=True)
@@ -47,7 +48,7 @@ if __name__ == '__main__':
 
     def print_board():
         for row in board:
-            print(row)
+            print(' '.join([str(elem) for elem in row]))
 
     def swap_positions(inp1, inp2):
         def move():
@@ -220,3 +221,104 @@ if __name__ == '__main__':
             for sq in row:
                 if sq == pa2:
                     return [board.index(row), row.index(sq)]
+
+
+
+
+
+class CLI:
+
+    def __init__(self,team="white"):
+        self.team = team
+        self.welcome()
+        self.rules()
+        self.turn()
+
+    def welcome(self):
+        print("/////////Welcome to Capture the King/////////// \n An 'Original Game' created by Steven & Nehemiah")
+
+    def rules(self):
+        print("//////The Rules///////// \n 1. The aim of the game is to capture the opposition's king (there is no check or checkmate so don't get caught 'sleeping') \n 2. The pieces move the exact same way as chess pieces (except there is no castling or en passant)")
+        print_board()
+        
+    def turn(self):
+        while input != "King has been caught":
+
+            print("Where is the piece you would like to move?")
+            input_start_cords = input()
+            arr = []
+            for char in input_start_cords:
+                if char == '1':
+                    arr.append(7)
+                elif char == '2':
+                    arr.append(6)
+                elif char == '3':
+                    arr.append(5)
+                elif char == '4':
+                    arr.append(4)
+                elif char == '5':
+                    arr.append(3)
+                elif char == '6':
+                    arr.append(2)
+                elif char == '7':
+                    arr.append(1)
+                elif char == '8':
+                    arr.append(0)
+                elif char == 'a':
+                    arr.append(0)
+                elif char == 'b':
+                    arr.append(1)
+                elif char == 'c':
+                    arr.append(2)
+                elif char == 'd':
+                    arr.append(3)
+                elif char == 'e':
+                    arr.append(4)
+                elif char == 'f':
+                    arr.append(5)
+                elif char == 'g':
+                    arr.append(6)
+                elif char == 'h':
+                    arr.append(7)
+                
+            print("Where would you like this piece to go?")
+            input_end_cords = input()
+            arr2 = []
+            for char in input_end_cords:
+                if char == '1':
+                    arr2.append(7)
+                elif char == '2':
+                    arr2.append(6)
+                elif char == '3':
+                    arr2.append(5)
+                elif char == '4':
+                    arr2.append(4)
+                elif char == '5':
+                    arr2.append(3)
+                elif char == '6':
+                    arr2.append(2)
+                elif char == '7':
+                    arr2.append(1)
+                elif char == '8':
+                    arr2.append(0)
+                elif char == 'a':
+                    arr2.append(0)
+                elif char == 'b':
+                    arr2.append(1)
+                elif char == 'c':
+                    arr2.append(2)
+                elif char == 'd':
+                    arr2.append(3)
+                elif char == 'e':
+                    arr2.append(4)
+                elif char == 'f':
+                    arr2.append(5)
+                elif char == 'g':
+                    arr2.append(6)
+                elif char == 'h':
+                    arr2.append(7)
+
+                
+            swap_positions(arr, arr2)
+
+CLI()
